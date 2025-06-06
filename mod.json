@@ -18,19 +18,19 @@
 		"custom-folder": {
 		"type": "folder",
 		"name": "Custom Song Directory",
-		"description": "The directory in which songs and SFX will be stored.",
+		"description": "The directory in which custom songs and SFX will be stored.",
 		"default": "{gd_save_dir}"
 		},
 		"migrate-folder": {
 		"type": "folder",
 		"name": "Migrate From Directory",
-		"description": "The directory from which songs and SFX will be migrated to your <co>custom save directory</c>.",
+		"description": "The directory from which songs and SFX will be migrated to your <cy>custom save directory</c>.",
 		"default": "{gd_save_dir}"
 		},
 		"button-setting": {
 			"type": "custom:button",
 			"name": "Migrate Songs",
-			"description": "Pressing the <cy>Migrate</c> button will move all songs from the <cb>default save directory</c> to your <co>custom save directory.</c>"
+			"description": "Pressing the <co>Migrate</c> button will move all songs from the <cg>'migrate from' directory</c> to your <co>custom save directory.</c>\nFiles in the <cy>desination folder</c> with the same name will be <cr>overwritten</c>."
 		}
 	},
 	"tags": [

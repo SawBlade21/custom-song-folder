@@ -1,6 +1,7 @@
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 #include <Geode/loader/Dirs.hpp>
+#include "blacklisted_files.hpp"
 
 using namespace geode::prelude;
 
@@ -42,7 +43,7 @@ protected:
         if (!SettingNodeV3::init(setting, width))
             return false;
         
-        m_buttonSprite = ButtonSprite::create("Automigrate", "goldFont.fnt", "GJ_button_01.png", .8f);
+        m_buttonSprite = ButtonSprite::create("Migrate", "goldFont.fnt", "GJ_button_01.png", .8f);
         m_buttonSprite->setScale(.5f);
         m_button = CCMenuItemSpriteExtra::create(
             m_buttonSprite, this, menu_selector(MyButtonSettingNodeV3::onButton)
@@ -76,7 +77,8 @@ protected:
                         for (const auto& entry : std::filesystem::directory_iterator(oldDir)) {
                             std::string ext = entry.path().extension().string();
                             
-                            if (std::filesystem::is_regular_file(entry.path()) && (ext == ".mp3" || ext == ".ogg")) {
+                            if (std::filesystem::is_regular_file(entry.path()) && (ext == ".mp3" || ext == ".ogg") && !blacklistedFiles.contains(entry.path().filename().string())) {
+                                log::debug("filename: {}", entry.path().filename().string());
                                 std::filesystem::rename(entry.path(), newDir / entry.path().filename());
                                 moved++;
                             }

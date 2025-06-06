@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include "button_setting.hpp"
+#include "blacklisted_files.hpp"
 
 using namespace geode::prelude;
 
@@ -24,7 +25,7 @@ class $modify(MusicDownloadManager) {
         if (!std::filesystem::is_directory(songPath)) return false;
 
         for (const auto& entry : std::filesystem::directory_iterator(songPath)) {
-            if (entry.is_regular_file() && entry.path().filename() == songID)
+            if (entry.is_regular_file() && entry.path().filename() == songID && !blacklistedFiles.contains(entry.path().filename().string()))
                 return true;
         }
 
