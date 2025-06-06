@@ -11,24 +11,32 @@ class $modify(MusicDownloadManager) {
         log::debug("pathForSongFolder()");
         std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
         if (std::filesystem::exists(customPath)) return customPath.string();
-        else return MusicDownloadManager::pathForSongFolder(p0);
+        else {
+            log::debug("pathForSongFolder DNE");
+            return MusicDownloadManager::pathForSongFolder(p0);
+        }
     }
 
     gd::string pathForSFXFolder(int p0) {
         log::debug("pathForSFXFolder()");
         std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
         if (std::filesystem::exists(customPath)) return customPath.string();
-        else return MusicDownloadManager::pathForSFXFolder(p0);
+        else {
+            log::debug("pathForSFXFolder DNE");
+            return MusicDownloadManager::pathForSFXFolder(p0);
+        }
     }
 
     gd::string pathForSong(int p0) {
-        log::debug("pathForSong()");
-        return MusicDownloadManager::pathForSong(p0);
+        auto path = MusicDownloadManager::pathForSong(p0);
+        log::debug("pathForSong(): {}", path);
+        return path;
     }
 
     gd::string pathForSFX(int p0) {
-        log::debug("pathForSFX()");
-        return MusicDownloadManager::pathForSFX(p0);
+        auto path = MusicDownloadManager::pathForSFX(p0);
+        log::debug("pathForSFX(): {}", path);
+        return path;
     }
    
     bool customIsSongDownloaded(int id, std::filesystem::path songPath) {
