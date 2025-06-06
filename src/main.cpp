@@ -7,14 +7,14 @@ using namespace geode::prelude;
 class $modify(MusicDownloadManager) {
 
     gd::string pathForSongFolder(int p0) {
-        gd::string customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
-        if (std::filesystem::exists(customPath)) return customPath;
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
+        if (std::filesystem::exists(customPath)) return customPath.string();
         else return MusicDownloadManager::pathForSongFolder(p0);
     }
 
     gd::string pathForSFXFolder(int p0) {
-        gd::string customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
-        if (std::filesystem::exists(customPath)) return customPath;
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
+        if (std::filesystem::exists(customPath)) return customPath.string();
         else return MusicDownloadManager::pathForSFXFolder(p0);
     }
    
