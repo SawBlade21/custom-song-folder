@@ -9,7 +9,7 @@ class $modify(MusicDownloadManager) {
 
     gd::string pathForSongFolder(int p0) {
         log::debug("pathForSongFolder()");
-        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder");
         if (std::filesystem::exists(customPath)) return customPath.string();
         else {
             log::debug("pathForSongFolder DNE");
@@ -19,7 +19,7 @@ class $modify(MusicDownloadManager) {
 
     gd::string pathForSFXFolder(int p0) {
         log::debug("pathForSFXFolder()");
-        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder");
         if (std::filesystem::exists(customPath)) return customPath.string();
         else {
             log::debug("pathForSFXFolder DNE");
