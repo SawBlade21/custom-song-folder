@@ -8,36 +8,21 @@ using namespace geode::prelude;
 class $modify(MusicDownloadManager) {
 
     gd::string pathForSongFolder(int p0) {
-        log::debug("pathForSongFolder()");
         std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
-        log::debug("customPath: {}", customPath);
-        if (std::filesystem::exists(customPath)) return customPath.string();
-        else {
-            log::debug("pathForSongFolder DNE");
+
+        if (std::filesystem::exists(customPath)) 
+            return customPath.string();
+        else
             return MusicDownloadManager::pathForSongFolder(p0);
-        }
     }
 
     gd::string pathForSFXFolder(int p0) {
-        log::debug("pathForSFXFolder()");
         std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
-        if (std::filesystem::exists(customPath)) return customPath.string();
-        else {
-            log::debug("pathForSFXFolder DNE");
+
+        if (std::filesystem::exists(customPath)) 
+            return customPath.string();
+        else 
             return MusicDownloadManager::pathForSFXFolder(p0);
-        }
-    }
-
-    gd::string pathForSong(int p0) {
-        auto path = MusicDownloadManager::pathForSong(p0);
-        log::debug("pathForSong(): {}", path);
-        return path;
-    }
-
-    gd::string pathForSFX(int p0) {
-        auto path = MusicDownloadManager::pathForSFX(p0);
-        log::debug("pathForSFX(): {}", path);
-        return path;
     }
    
     bool customIsSongDownloaded(int id, std::filesystem::path songPath) {
@@ -45,8 +30,6 @@ class $modify(MusicDownloadManager) {
         if (!std::filesystem::is_directory(songPath)) return false;
 
         std::string songID = std::to_string(id);
-
-        log::debug("customIsSongDownloaded()");
         
         for (const auto& entry : std::filesystem::directory_iterator(songPath)) {
 
@@ -61,7 +44,6 @@ class $modify(MusicDownloadManager) {
     }
 
     cocos2d::CCArray* getDownloadedSongs() {
-        log::debug("getDownloadedSongs()");
         auto songs = MusicDownloadManager::getDownloadedSongs();
         std::filesystem::path songPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
         CCArray* newSongs = CCArray::create();
@@ -69,11 +51,9 @@ class $modify(MusicDownloadManager) {
         CCObject* obj;
         CCARRAY_FOREACH(songs, obj) {
             SongInfoObject* info = static_cast<SongInfoObject*>(obj);
-            log::debug("songID: {}", info->m_songID);
-            if (info && customIsSongDownloaded(info->m_songID, songPath)) {
-                log::debug("exists: {}", info->m_songID);
+
+            if (info && customIsSongDownloaded(info->m_songID, songPath))
                 newSongs->addObject(obj);
-            }
         }
 
         return newSongs;
