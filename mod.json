@@ -1,0 +1,40 @@
+{
+	"geode": "4.5.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "sawblade.custom_song_location",
+	"name": "Custom Song Folder",
+	"version": "v1.0.0",
+	"developer": "Sawblade",
+	"description": "Save songs and SFX to a custom directory",
+	"settings": {
+		"custom-folder": {
+		"type": "folder",
+		"name": "Custom Song Directory",
+		"description": "The directory in which songs and SFX will be stored.",
+		"default": "{gd_save_dir}"
+		},
+		"migrate-folder": {
+		"type": "folder",
+		"name": "Migrate From Directory",
+		"description": "The directory that songs and SFX will be migrated to your <co>custom save directory</c> from.",
+		"default": "{gd_save_dir}"
+		},
+		"button-setting": {
+			"type": "custom:button",
+			"name": "Migrate Songs",
+			"description": "Pressing the <cy>Migrate</c> button will move all songs from the <cb>default save directory</c> to your <co>custom save directory.</c>"
+		}
+	},
+	"tags": [
+		"offline",
+		"enhancement",
+		"music",
+		"utility",
+		"customization"
+	]
+}
