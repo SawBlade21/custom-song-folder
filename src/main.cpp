@@ -36,6 +36,8 @@ class $modify(MusicDownloadManager) {
         if (!std::filesystem::is_directory(songPath)) return false;
 
         std::string songID = std::to_string(id);
+
+        log::debug("customIsSongDownloaded()");
         
         for (const auto& entry : std::filesystem::directory_iterator(songPath)) {
 
@@ -50,6 +52,7 @@ class $modify(MusicDownloadManager) {
     }
 
     cocos2d::CCArray* getDownloadedSongs() {
+        log::debug("getDownloadedSongs()");
         auto songs = MusicDownloadManager::getDownloadedSongs();
         std::filesystem::path songPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
         CCArray* newSongs = CCArray::create();
@@ -57,6 +60,7 @@ class $modify(MusicDownloadManager) {
         CCObject* obj;
         CCARRAY_FOREACH(songs, obj) {
             SongInfoObject* info = static_cast<SongInfoObject*>(obj);
+            log::debug("songID: {}", info->m_songID);
             if (info && customIsSongDownloaded(info->m_songID, songPath)) {
                 log::debug("exists: {}", info->m_songID);
                 newSongs->addObject(obj);
