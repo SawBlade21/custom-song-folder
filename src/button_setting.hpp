@@ -5,6 +5,12 @@
 
 using namespace geode::prelude;
 
+#ifdef GEODE_IS_WINDOWS
+const std::string slash = "\\";
+#else 
+const std::string slash = "/";
+#endif
+
 class MyButtonSettingV3 : public SettingV3 {
 public:
     static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {

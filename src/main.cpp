@@ -5,11 +5,6 @@
 
 using namespace geode::prelude;
 
-std::string slash = "/";
-#ifdef GEODE_IS_WINDOWS
-std::string slash = "\\";
-#endif
-
 class $modify(MusicDownloadManager) {
 
     gd::string pathForSongFolder(int p0) {
