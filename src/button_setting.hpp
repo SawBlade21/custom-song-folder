@@ -83,7 +83,13 @@ protected:
                         }  
 
                 } catch (const std::filesystem::filesystem_error& err) {
-                    status = "An error occured while migrating files." + (moved > 0) ? fmt::format(" {} files were transferred successfully.", moved) : " No files were transferred.";
+                    status = "An error occured while migrating files.";
+                    
+                    if (moved > 0)
+                        status += fmt::format(" {} files were transferred successfully.", moved);
+                    else 
+                        status += " No files were transferred.";
+
                     moved = 0;
                     log::error("An error occured while migrating files: {}", err);
                 }
