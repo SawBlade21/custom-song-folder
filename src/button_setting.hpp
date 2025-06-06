@@ -63,8 +63,8 @@ protected:
 
     void onButton(CCObject*) {
 
-        std::filesystem::path oldDir = Mod::get()->getSettingValue<std::filesystem::path>("migrate-folder");
-        std::filesystem::path newDir = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder");
+        std::filesystem::path oldDir = Mod::get()->getSettingValue<std::filesystem::path>("migrate-folder").string() + slash;
+        std::filesystem::path newDir = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
         std::string status = "No songs or SFX were found.";
         int moved = 0;
         
@@ -78,7 +78,6 @@ protected:
                             std::string ext = entry.path().extension().string();
                             
                             if (std::filesystem::is_regular_file(entry.path()) && (ext == ".mp3" || ext == ".ogg") && !blacklistedFiles.contains(entry.path().filename().string())) {
-                                log::debug("filename: {}", entry.path().filename().string());
                                 std::filesystem::rename(entry.path(), newDir / entry.path().filename());
                                 moved++;
                             }

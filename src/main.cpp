@@ -5,11 +5,17 @@
 
 using namespace geode::prelude;
 
+std::string slash = "/";
+#ifdef GEODE_IS_WINDOWS
+std::string slash = "\\";
+#endif
+
 class $modify(MusicDownloadManager) {
 
     gd::string pathForSongFolder(int p0) {
         log::debug("pathForSongFolder()");
-        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder");
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
+        log::debug("customPath: {}", customPath);
         if (std::filesystem::exists(customPath)) return customPath.string();
         else {
             log::debug("pathForSongFolder DNE");
@@ -19,7 +25,7 @@ class $modify(MusicDownloadManager) {
 
     gd::string pathForSFXFolder(int p0) {
         log::debug("pathForSFXFolder()");
-        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder");
+        std::filesystem::path customPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
         if (std::filesystem::exists(customPath)) return customPath.string();
         else {
             log::debug("pathForSFXFolder DNE");
@@ -62,7 +68,7 @@ class $modify(MusicDownloadManager) {
     cocos2d::CCArray* getDownloadedSongs() {
         log::debug("getDownloadedSongs()");
         auto songs = MusicDownloadManager::getDownloadedSongs();
-        std::filesystem::path songPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + "\\";
+        std::filesystem::path songPath = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
         CCArray* newSongs = CCArray::create();
 
         CCObject* obj;
