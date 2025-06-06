@@ -1,4 +1,4 @@
-# Custom Song Directory
+# Custom Song Folder
 by [Sawblade](user:14662713)
 
 ---
