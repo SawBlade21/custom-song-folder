@@ -7,6 +7,9 @@
 		"ios": "2.2074"
 	},
 	"id": "sawblade.custom_song_location",
+	"links": {
+		"source": "https://github.com/SawBlade21/custom-song-folder"
+	},
 	"name": "Custom Song Folder",
 	"version": "v1.0.0",
 	"developer": "Sawblade",
