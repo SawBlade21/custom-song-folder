@@ -49,7 +49,7 @@ protected:
         if (!SettingNodeV3::init(setting, width))
             return false;
         
-        m_buttonSprite = ButtonSprite::create("Migrate", "goldFont.fnt", "GJ_button_01.png", .8f);
+        m_buttonSprite = ButtonSprite::create("Transfer", "goldFont.fnt", "GJ_button_01.png", .8f);
         m_buttonSprite->setScale(.5f);
         m_button = CCMenuItemSpriteExtra::create(
             m_buttonSprite, this, menu_selector(MyButtonSettingNodeV3::onButton)
@@ -71,6 +71,7 @@ protected:
 
         std::filesystem::path oldDir = Mod::get()->getSettingValue<std::filesystem::path>("migrate-folder").string() + slash;
         std::filesystem::path newDir = Mod::get()->getSettingValue<std::filesystem::path>("custom-folder").string() + slash;
+        bool overwrite = Mod::get()->getSettingValue<bool>("overwrite");
         std::string status = "No songs or SFX were found.";
         int moved = 0;
         
@@ -84,8 +85,11 @@ protected:
                             std::string ext = entry.path().extension().string();
                             
                             if (std::filesystem::is_regular_file(entry.path()) && (ext == ".mp3" || ext == ".ogg") && !blacklistedFiles.contains(entry.path().filename().string())) {
-                                std::filesystem::rename(entry.path(), newDir / entry.path().filename());
-                                moved++;
+                                std::filesystem::path destDir = newDir / entry.path().filename();
+                                if (overwrite || (!overwrite && !std::filesystem::exists(destDir))) {
+                                    std::filesystem::rename(entry.path(), destDir);
+                                    moved++;
+                                }
                             }
                         }  
 

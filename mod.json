@@ -3,8 +3,7 @@
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
+		"mac": "2.2074"
 	},
 	"id": "sawblade.custom_song_folder",
 	"links": {
@@ -18,23 +17,28 @@
 		"custom-folder": {
 		"type": "folder",
 		"name": "Custom Song Directory",
-		"description": "The directory in which custom songs and SFX will be stored.",
+		"description": "The <cy>directory</c> in which custom songs and SFX will be stored.",
 		"default": "{gd_save_dir}"
 		},
 		"migrate-folder": {
 		"type": "folder",
-		"name": "Migrate From Directory",
-		"description": "The directory from which songs and SFX will be migrated to your <cy>custom save directory</c>.",
+		"name": "Transfer From Directory",
+		"description": "The <cj>directory</c> from which songs and SFX will be transferred to your <cy>custom save directory</c>.",
 		"default": "{gd_save_dir}"
+		},
+		"overwrite": {
+			"type": "bool",
+			"name": "Overwrite Files",
+			"description": "If enabled, transferring files will <cr>overwrite</c> those in the <cy>desination folder</c> with the same name. Otherwise, files with the same name will not be transferred.",
+			"default": false
 		},
 		"button-setting": {
 			"type": "custom:button",
-			"name": "Migrate Songs",
-			"description": "Pressing the <co>Migrate</c> button will move all songs from the <cg>'migrate from' directory</c> to your <co>custom save directory.</c>\nFiles in the <cy>desination folder</c> with the same name will be <cr>overwritten</c>."
+			"name": "Transfer Songs",
+			"description": "Pressing the <cg>Transfer</c> button will move all songs from the <cj>'transfer from' directory</c> to your <cy>custom save directory.</c>"
 		}
 	},
 	"tags": [
-		"offline",
 		"enhancement",
 		"music",
 		"utility",
