@@ -30,7 +30,6 @@ class $modify(MusicDownloadManager) {
     }
    
     bool customIsSongDownloaded(std::string songID) {
-
         if (std::filesystem::exists(customPath / (songID + ".mp3")) || std::filesystem::exists(customPath / (songID + ".ogg")))
             return true;
         else return false;
