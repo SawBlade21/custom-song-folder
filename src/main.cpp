@@ -29,16 +29,15 @@ class $modify(MusicDownloadManager) {
             return MusicDownloadManager::pathForSFXFolder(p0);
     }
    
-    bool customIsSongDownloaded(int id) {
-        std::string songID = std::to_string(id);
+    bool customIsSongDownloaded(std::string songID) {
 
         if (std::filesystem::exists(customPath / (songID + ".mp3")) || std::filesystem::exists(customPath / (songID + ".ogg")))
             return true;
         else return false;
     }
 
-    bool isSongDownloaded(int p0) {
-        return customIsSongDownloaded(p0);
+    bool isSongDownloaded(int id) {
+        return customIsSongDownloaded(std::to_string(id));
     }
 
     cocos2d::CCArray* getDownloadedSongs() {
@@ -49,7 +48,7 @@ class $modify(MusicDownloadManager) {
         CCARRAY_FOREACH(songs, obj) {
             SongInfoObject* info = static_cast<SongInfoObject*>(obj);
 
-            if (info && customIsSongDownloaded(info->m_songID))
+            if (info && customIsSongDownloaded(std::to_string(info->m_songID)))
                 newSongs->addObject(obj);
         }
 
