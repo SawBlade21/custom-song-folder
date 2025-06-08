@@ -30,9 +30,7 @@ class $modify(MusicDownloadManager) {
     }
    
     bool customIsSongDownloaded(std::string songID) {
-        if (std::filesystem::exists(customPath / (songID + ".mp3")) || std::filesystem::exists(customPath / (songID + ".ogg")))
-            return true;
-        else return false;
+        return (std::filesystem::exists(customPath / (songID + ".mp3")) || std::filesystem::exists(customPath / (songID + ".ogg")));
     }
 
     bool isSongDownloaded(int id) {
@@ -40,16 +38,11 @@ class $modify(MusicDownloadManager) {
     }
 
     cocos2d::CCArray* getDownloadedSongs() {
-        auto songs = MusicDownloadManager::getDownloadedSongs();
         CCArray* newSongs = CCArray::create();
 
-        CCObject* obj;
-        CCARRAY_FOREACH(songs, obj) {
-            SongInfoObject* info = static_cast<SongInfoObject*>(obj);
-
-            if (info && customIsSongDownloaded(std::to_string(info->m_songID)))
-                newSongs->addObject(obj);
-        }
+        for (SongInfoObject* info : CCArrayExt<SongInfoObject*>(MusicDownloadManager::getDownloadedSongs()))
+            if (customIsSongDownloaded(std::to_string(info->m_songID)))
+                newSongs->addObject(info);
 
         return newSongs;
     }
