@@ -13,6 +13,7 @@
 	"version": "v1.0.0",
 	"developer": "Sawblade",
 	"description": "Save songs and SFX to a custom directory",
+	"early-load": true,
 	"settings": {
 		"custom-folder": {
 		"type": "folder",
